@@ -1,0 +1,39 @@
+eval 1 = filter + no thresholding
+eval 2 = filter + thresholding
+eval 3 = nofilter, just spectralflux
+eval 4 = filter alp=0.5, no thresholding
+eval 5 = using precision and recall + filter
+eval 6 = using precision and recall, just spectralflux
+eval 7 = using precision and recall, using thresholds
+eval 8 = theshold the spectral flux. peak pick
+you were always using thresholding. Just that you lost track.
+
+With filter: f-measure=86.67%
+             precision=86.60%, recall=86.75%
+
+
+Sans Filter: f-measure=81.03%
+             precision=69.60%, recall=97.16%
+             
+
+more mistakes, you took multiple true positives for a given groundtruth.
+here are new ones:
+
+eval 9 = threshold of 3*mean(onset)/4 for the spectrul flux
+             f-measure=55.15%
+             precision=44.42%, recall=72.70%
+eval 10= same as above, inclusive of adaptive thresholding
+             f-measure=71.92%
+             precision=74.81%, recall=69.25%
+eval 11= test result of the onset detector from MIR toolbox 
+             f-measure=70.63%
+             precision=82.02%, recall=62.02%
+eval 12= same as above, inclusive of adaptive thresholding with window of 0.05
+             f-measure=71.71%
+             precision=75.76%, recall=68.20%
+eval 13= same as above, just spectral flux, but with the window of 0.05
+             f-measure=72.88%
+             precision=44.33%, recall=72.88%
+eval 14= using the MIR toolbox, and with the window of 0.05
+             f-measure=69.06%
+             precision=82.30%, recall=59.4%

@@ -1,0 +1,37 @@
+clear all;
+close all; clc;
+% [X,Fs]= wavread('C:\Users\Rithesh\Desktop\Backup\Alexander\TechLab\Onset Detection\dev2\dev2__ultimate_nz_tour__snip_43_61__mix.wav');
+% [X,Fs]= wavread('C:\Users\Rithesh\Desktop\Backup\Alexander\TechLab\Onset Detection\dev2\Sine_100.wav');
+%sound(X,Fs);dev2__fort_minor-remember_the_name__snip_54_78__mix
+
+% [X,Fs]= wavread('/Volumes/RITHESH/Backup/Alexander/TechLab/Wav Files/Master Parai.wav');
+[X,Fs]= wavread('F:\Backup\Alexander\TechLab\Wav Files\Master Parai.wav');
+X=mean(X,2);
+Ws=2048;
+OL=441;
+xlen=length(X);
+flen=floor(xlen/Ws);
+X=X';
+% X=[X zeros(1,flen)];
+X=X(1:flen*Ws);
+%hamming window
+n=1:2048;
+w=0.54-0.46*cos(2*pi*n./2048);
+k=1;
+stft_len=length(1:441:(length(X)-2047));
+stft(:,:)=zeros(stft_len,2048);
+phase=stft;
+pd=stft(:,1);
+for i=1:441:(length(X)-2047)
+    temp=X(i:i+2047);
+    stft(k,:)=fft(temp.*w);
+    phase(k,:)=angle(stft(k,:)); 
+    diff1=diff(phase(k,:));
+    diff2=diff(diff1);
+    pd(k)=mean(diff2);
+    NWPD=mean(diff2.*
+    k=k+1;
+end;
+XX = spectrogram(X, Ws, (Ws-OL), 2*Ws, Fs);
+
+%boing(n:n+2047,1:Fs)=2;
